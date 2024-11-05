@@ -77,10 +77,9 @@ router.post('/login', async (req, res) => {
 
     try {
         // Check if user exists by username
-        const userQueryResult = await pool.query('SELECT * FROM users WHERE username = $1', [username.toLowerCase()]);
+        const userQueryResult = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
         if (userQueryResult.rows.length > 0) {
             const user = userQueryResult.rows[0];
-            console.log(user)
             // Compare provided password with stored hash
             const match = await bcrypt.compare(password, user.password_hash);
             if (match) {
