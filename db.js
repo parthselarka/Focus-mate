@@ -2,12 +2,11 @@ const { Pool } = require('pg');
 require('dotenv').config();
 
 const pool = new Pool({
-    user: process.env.DB_USER || 'postgres', // Default to 'postgres' if not set
-    host: process.env.DB_HOST || 'localhost', // Default to 'localhost'
-    database: process.env.DB_NAME || 'tasks', // Default to 'tasks'
-    password: process.env.DB_PASSWORD || '124816', // Default to '124816'
-    port: process.env.DB_PORT || 5433, // Default to 5433
-    connectionString: process.env.DATABASE_URL, // Use the DATABASE_URL from .env
+    user: 'tasks_ks22_user',       // Replace with the user provided by Render
+    host: 'dpg-cskt6uqj1k6c73bn58og-a',       // Replace with the host provided by Render
+    database: 'tasks_ks22',     // Replace with the database name provided by Render
+    password: 'BwuB1XiPalgt0j26dQVJcylAIlQI3By5', // Replace with the password provided by Render
+    port: 5432, 
     ssl: {
         rejectUnauthorized: false, // If needed, for production
     },
