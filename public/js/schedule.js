@@ -21,16 +21,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (isConfirmed) {
                     const eventData = {
                         title: title,
-                        start: toUTCDate(selectInfo.start),
-                        end: toUTCDate(selectInfo.end),
+                        start: selectInfo.startStr, // This should be local time
+                        end: selectInfo.endStr, // This should be local time
                         allDay: selectInfo.allDay
                     };
-                    
+        
+                    // Convert to UTC for sending to the server
+                    const startUtc = new Date(eventData.start).toISOString();
+                    const endUtc = new Date(eventData.end).toISOString();
+        
                     $.ajax({
                         url: '/api/tasks',
                         type: 'POST',
                         contentType: 'application/json',
-                        data: JSON.stringify(eventData),
+                        data: JSON.stringify({
+                            ...eventData,
+                            start: startUtc, // Send as UTC
+                            end: endUtc // Send as UTC
+                        }),
                         success: function(data) {
                             console.log('Event added successfully', data);
                             
@@ -38,13 +46,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                 ...data,
                                 id: data.task_id,
                                 title: data.title,
-                                start: toUTCDate(data.start).toISOString(), // Convert to ISO string
-                                end: toUTCDate(data.end_event).toISOString(), // Convert to ISO string
+                                start: data.start, // Keep local time for display
+                                end: data.end_event, // Keep local time for display
                                 allDay: data.all_day
                             });
-
-                            console.log(start ,"," ,end)
-                            
                         },
                         error: function(xhr, status, error) {
                             console.error('Error adding event:', error);
@@ -53,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         },
+        
 
         eventDidMount: function(info) {
             console.log("Event details:", info.event); 
