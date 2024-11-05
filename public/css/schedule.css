@@ -1,0 +1,54 @@
+#contextMenu {
+    display: none;
+    position: absolute; /* To position based on cursor location */
+    z-index: 10000; /* Ensure it's above other elements */
+    flex-direction: column;
+    height: auto;
+    list-style: none;
+    padding: 0px;
+}
+
+.dropdown-item{
+    border:none;
+    transition: 0.3s;
+    width: 80px;
+}
+
+#editEvent:hover, #deleteEvent:hover{
+    background-color: rgb(158, 158, 158);
+    cursor: pointer;
+    border-radius: 20px, 20px, 20px, 20px;
+}
+
+#deleteEvent{
+    height: 35px;
+}
+
+#calendar{
+    margin-top: 20px;
+    height: 100vh;
+    
+}
+
+#calendar *{
+    color: black !important;
+    text-decoration: none;
+}
+
+#calendar button{
+    color: rgb(0, 0, 0) !important;
+    background-color: #0d6dfd00;
+    border: none;
+}
+
+#calendar button:hover{
+    color: rgb(89, 89, 89) !important;
+    box-shadow: none;
+    border: none;
+}
+
+#calendar button:focus {
+    color: rgb(89, 89, 89) !important;
+    box-shadow: none;
+    border: none;
+}

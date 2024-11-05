@@ -1,0 +1,55 @@
+<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/home.css">
+<div class="wrapper">
+
+
+<div class="main-content">
+    <div class="title">
+        <h2>Welcome to focusmate</h2>     
+    </div>
+    
+    <div class="info">
+        <h4><div class="intro-title">Introduction to the Pomodoro Technique</div></h4>
+        <p>Subtitle: Boost Your Productivity with the Pomodoro Technique
+
+            The Pomodoro Technique is a time management method that can supercharge your productivity and help you stay focused on your tasks. This technique is widely recognized for its simplicity and effectiveness in enhancing work efficiency. In this section, we'll introduce you to the Pomodoro Technique, explain why it's so effective, and guide you on how to use it with Focus Mate, our productivity app.</p>
+         <h4><div class="technique-title">What is the Pomodoro Technique?</div></h4>
+         <p>The Pomodoro Technique, developed by Francesco Cirillo in the late 1980s, is a time management approach designed to enhance your productivity by breaking your work into focused intervals, typically 25 minutes each, separated by short breaks. These focused intervals are called "Pomodoros." The technique is named after the Italian word for "tomato," inspired by the tomato-shaped kitchen timer Cirillo initially used.</p>
+         <h4> <div class="why-title">Why is the Pomodoro Technique So Effective?</div></h4>
+         <p>The Pomodoro Technique offers several benefits that make it highly effective:
+
+            Increased Focus: By working in short, concentrated bursts, you can maintain high levels of concentration and avoid distractions.
+            Enhanced Productivity: The structured work-rest cycle prevents burnout and allows you to make steady progress without feeling overwhelmed.
+            Better Time Management: Pomodoros help you estimate how long tasks take, improving your ability to plan and prioritize.
+            Motivation and Accountability: The ticking timer provides a sense of urgency, helping you stay accountable to your work.
+            Adaptability: You can adjust the Pomodoro intervals to suit your workflow and energy levels.</p>
+         <h4><div class="how-title">How to Use Pomodoro in Focus Mate</div></h4>
+         <p>Focus Mate is designed to seamlessly integrate the Pomodoro Technique into your work routine. Here's how to get started:
+
+            Create Tasks: Begin by adding tasks or activities you want to work on in the Schedule section of our app.
+            Set Pomodoro Timer: Once your tasks are listed, select one and start a Pomodoro timer. You can customize the timer duration according to your preference.
+            Work Intensely: During the Pomodoro, focus solely on the task at hand. Avoid distractions and work with full concentration.
+            Take Short Breaks: After each Pomodoro, enjoy a short break to recharge. You can use this time to stretch, grab a snack, or relax briefly.
+            Repeat and Track: Continue this cycle as you work through your tasks. Focus Mate will track your Pomodoros and breaks, providing you with insights into your productivity.
+            By combining the Pomodoro Technique with Focus Mate, you can optimize your work sessions, maintain productivity, and achieve your goals more efficiently.
+            
+            Start experiencing the power of focused work with the Pomodoro Technique and Focus Mate today!</p>
+    </div>
+
+   
+</div>
+
+    <%- include('partials/footer') %>
+</div>
+
+<script>
+    const beamsClient = new PusherPushNotifications.Client({
+      instanceId: 'b4dc10ff-33bb-4d77-ae4d-ba8d0399da02',
+    });
+  
+    beamsClient.start()
+      .then(() => beamsClient.addDeviceInterest('hello'))
+      .then(() => console.log('Successfully registered and subscribed!'))
+      .catch(console.error);
+  </script>
+  

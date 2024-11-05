@@ -1,0 +1,38 @@
+.logo{
+    height: 80px;
+    width: 80px;
+}
+
+/* Assuming your navbar has a class called 'navbar' */
+.navbar-nav {
+    display: flex;
+    align-items: center; /* This will vertically align your nav items */
+}
+
+
+.sign-out {
+    /* Use this class on the 'Sign Out' list item or anchor tag */
+    display: inline-block; /* Align with other inline elements or set to 'inline' if all others are 'inline' */
+    vertical-align: middle; /* Aligns the button text vertically */
+    padding: .5rem 1rem; /* Adjust padding to match other nav items */
+    margin: 0; /* Remove any default margins */
+}
+
+/* Correct any specific margin or padding issues */
+.nav-link {
+    padding: .5rem 1rem; /* Example padding, adjust as needed */
+    display: inline-block; /* Align with other inline elements */
+    vertical-align: middle; /* Aligns the link text vertically */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* ... other styles ... */
+  }
+
+/* Assuming you have an ID or class for the sign-out button */
+#logout-link{
+    margin-left: auto; /* This pushes the sign-out button to the far right */
+}

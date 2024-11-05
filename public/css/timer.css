@@ -1,0 +1,57 @@
+h1{
+    text-align: center;
+}
+
+#time{
+    display: block;
+    font-size: 100px;
+    text-align: center;
+    align-items: center;
+}
+
+button{
+    background-color: transparent;
+    border: none;
+}
+
+.btn-work{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+input{
+    width: 45px;
+}
+
+.user-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#workDuration{
+    margin-right: 20px;
+}
+
+.todo-list{
+    margin: auto;
+    margin-top: 40px;
+}
+
+#todayTasks{
+    margin: 0px;
+    list-style-type: none;
+    padding: 0px;
+}
+
+li{
+    margin-left: 0px;
+    margin-bottom: 10px;
+}
+
+.taskMessage{
+    font-size: 16px;
+    background-color: red;
+}

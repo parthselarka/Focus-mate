@@ -1,0 +1,19 @@
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.info {
+    max-width: 1200px;
+    height: 100%; /* Add this line to make .info take up full height */
+    margin: auto;
+}
+
+.center-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center content */
+    align-items: center; /* Horizontally center content */
+    text-align: center; /* Center-align text within the div */
+    height: 100%; /* Make sure the container takes up the full height */
+}
