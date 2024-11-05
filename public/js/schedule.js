@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (isConfirmed) {
                     const eventData = {
                         title: title,
-                        start: selectInfo.startStr,
-                        end: selectInfo.endStr,
+                        start: toUTCDate(selectInfo.start),
+                        end: toUTCDate(selectInfo.end),
                         allDay: selectInfo.allDay
                     };
                     
@@ -38,10 +38,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                 ...data,
                                 id: data.task_id,
                                 title: data.title,
-                                start: data.start,
-                                end: data.end_event,
+                                start: toUTCDate(data.start).toISOString(), // Convert to ISO string
+                                end: toUTCDate(data.end_event).toISOString(), // Convert to ISO string
                                 allDay: data.all_day
                             });
+                            
                         },
                         error: function(xhr, status, error) {
                             console.error('Error adding event:', error);
@@ -131,9 +132,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 
     });
 
-    function toUTCDate(localDate) {
+    function toUTCDate(dateString) {
+        const localDate = new Date(dateString);
         return new Date(Date.UTC(localDate.getFullYear(), localDate.getMonth(), localDate.getDate(), localDate.getHours(), localDate.getMinutes(), localDate.getSeconds()));
     }
+    
 
     function updateEventInDatabase(event) {
         const eventId = event.id; // Use event.id which should correspond to task_id in your DB

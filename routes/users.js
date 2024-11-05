@@ -80,7 +80,7 @@ router.post('/login', async (req, res) => {
         const userQueryResult = await pool.query('SELECT * FROM users WHERE username = $1', [username.toLowerCase()]);
         if (userQueryResult.rows.length > 0) {
             const user = userQueryResult.rows[0];
-
+            console.log(user)
             // Compare provided password with stored hash
             const match = await bcrypt.compare(password, user.password_hash);
             if (match) {
