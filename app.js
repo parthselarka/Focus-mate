@@ -1,62 +1,52 @@
-    const express = require('express');
-    const app = express();
-    const pool = require('./db'); // Ensure this path correctly points to your db setup file
-    const cors = require('cors');
-    const moment = require('moment');
-    const bodyParser = require('body-parser');
-    const cron = require('node-cron');
-    const session = require('express-session');
+const express = require('express');
+const app = express();
+const pool = require('./db'); // Ensure this path correctly points to your db setup file
+const cors = require('cors');
+const moment = require('moment');
+const bodyParser = require('body-parser');
+const cron = require('node-cron');
+const session = require('express-session');
+const PushNotifications = require('@pusher/push-notifications-server');
+require('dotenv').config(); // Load environment variables
 
-    // Assuming timer-settings.js is in a directory named "routes"
-    const PushNotifications = require('@pusher/push-notifications-server');
+let beamsClient = new PushNotifications({
+    instanceId: process.env.PUSHER_INSTANCE_ID,
+    secretKey: process.env.PUSHER_SECRET_KEY
+});
 
-    let beamsClient = new PushNotifications({
-    instanceId: 'b4dc10ff-33bb-4d77-ae4d-ba8d0399da02',
-    secretKey: 'CFF061D879BA64A3D5A65F5DE8DE1BDB3DF73289CE51F37E27DF87ECE63E4525'
-    });
+app.use(express.static('public'));
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-    app.use(express.static('public'));
+// Set EJS as templating engine
+app.set('view engine', 'ejs');
 
+app.use(session({
+    secret: process.env.SECRET_SESSION_KEY, // Use the session secret from .env
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false, httpOnly: true, maxAge: 3600000 }
+}));
 
-    app.use(cors());
+const userRoutes = require('./routes/users');
+const timerSettingsRoutes = require('./routes/timer-settings');
+app.use('/api/timer/settings', timerSettingsRoutes);
+app.use(userRoutes);
 
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(bodyParser.json());
+const nodemailer = require('nodemailer');
 
-    // Set EJS as templating engine
-    app.set('view engine', 'ejs');
+// Configure your SMTP transporter using environment variables
+const transporter = nodemailer.createTransport({
+    service: 'gmail', // Use your SMTP provider
+    auth: {
+        user: process.env.EMAIL_USER, // Use the email from .env
+        pass: process.env.EMAIL_PASS  // Use the password from .env
+    }
+});
 
-    app.use(session({
-        secret: 'c0a912046a3e38e642273c57244e579c373826343c1e646251cd4de7d17f9d31b5f4592f4147bbf4eadf34c784dcf26417e29f34ff5f07a9aba07e2e8be26747', // Replace 'yourSecretKey' with your actual secret key
-        resave: false,
-        saveUninitialized: true,
-        cookie: { secure: false,
-            httpOnly: true, 
-            maxAge: 3600000 }
-    }));
+// The rest of your app.js remains unchanged...
 
-    const userRoutes = require('./routes/users');
-
-    const timerSettingsRoutes = require('./routes/timer-settings');
-    app.use('/api/timer/settings', timerSettingsRoutes);
-    // Use the routes
-    app.use(userRoutes);
-
-    const { checkTasksStartTimes } = require('./utils/checkTasksStartTimes');
-
-    
-
-    const nodemailer = require('nodemailer');
-
-    // Configure your SMTP transporter
-    const transporter = nodemailer.createTransport({
-      service: 'gmail', // Use your SMTP provider
-      auth: {
-        user: 'focus01mate@gmail.com',
-        pass: 'bopu mxsy vmiz lqgl'
-      }
-    });
-    
     async function getRelevantTasks() {
         const now = new Date();
 
