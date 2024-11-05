@@ -42,6 +42,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                 end: toUTCDate(data.end_event).toISOString(), // Convert to ISO string
                                 allDay: data.all_day
                             });
+
+                            console.log(start ,"," ,end)
                             
                         },
                         error: function(xhr, status, error) {
